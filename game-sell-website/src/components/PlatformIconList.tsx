@@ -29,12 +29,12 @@ export const PlatformIconList = ({platform}:Props) => {
     if (slug.startsWith("nintendo")) return "nintendo";
     return slug; // keep as is if already matches
     }
+   const uniqueSlugs = [...new Set(platform.map(p => normalizeSlug(p.slug)))];
   return (
-    <HStack>
-        {platform.map((p) => {
-        const normalized = normalizeSlug(p.slug);
-        const IconComponent = iconMap[normalized];
-        return IconComponent ? <Icon as={IconComponent} key={p.id} /> : null;
+    <HStack marginY={2} >
+        {uniqueSlugs.map((p) => {
+        const IconComponent = iconMap[p];
+        return IconComponent ? <Icon as={IconComponent} key={p} color="gray.500" /> : null;
       })}
     </HStack>
   )
