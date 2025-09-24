@@ -10,7 +10,8 @@ interface Props {
 
 export const GameCard = ({ game }: Props) => {
   return (
-    <Card.Root borderRadius={10} overflow="hidden">
+    //we change width in skeleton to match later
+    <Card.Root width="300px" borderRadius={10} overflow="hidden">
       <Image src={getImageCropped(game.background_image)} />
       <CardBody>
         <Heading fontSize="2xl">{game.name}</Heading>

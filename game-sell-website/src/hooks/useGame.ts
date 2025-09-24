@@ -22,16 +22,23 @@ interface FetchingResponseData{
 export const useGame = () => {
     const[ games,setGames ] = useState<Game[]>([]);
     const[ error,setError ] = useState("");
+    const[ isLoading,setLoading ]=useState(false);
 
     useEffect(()=>{
         const controller = new AbortController();
+
+        setLoading(true);
         apiClient.get<FetchingResponseData>("/games",{signal:controller.signal} )
-        .then(res=>setGames(res.data.results))
+        .then(res=>{
+            setGames(res.data.results);
+            setTimeout(() => setLoading(false), 500)
+        })
         .catch(err=>{
             if (err instanceof CanceledError) return;
+            setLoading(false);
             setError(err.message)})
 
      return ()=> controller.abort();
     }, []);
-    return {games, error};
+    return {games, error, isLoading};
 }
