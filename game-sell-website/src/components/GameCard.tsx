@@ -10,7 +10,6 @@ interface Props {
 
 export const GameCard = ({ game }: Props) => {
   return (
-    //we change width in skeleton to match later
     <Card.Root>
       <Image src={getImageCropped(game.background_image)} />
       <CardBody>
