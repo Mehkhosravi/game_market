@@ -1,9 +1,12 @@
 import { HStack, Image, ListItem, ListRoot, Text } from "@chakra-ui/react";
 import { useGenre } from "../hooks/useGenre";
 import getImageCropped from "../services/crop-image";
+import { SideGenreSkeleton } from "./SideGenreSkeleton";
 
 export const SideGenres = () => {
-  const { data: genres } = useGenre();
+  const { data: genres, isLoading, error } = useGenre();
+  if (isLoading)  return( <SideGenreSkeleton /> );
+  if (error) return null;
   return (
     <ListRoot paddingLeft="5px">
       {genres.map((genre) => (
