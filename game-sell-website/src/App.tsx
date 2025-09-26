@@ -27,7 +27,7 @@ function App() {
         <SideGenres selectedGenre={selectedGenre} onSelectedGenre={(genre)=> setSelectedGenre(genre)}/>
       </GridItem>
       <GridItem area="main" >
-        <PlatformSelector handleSelectedPlatform={(platform)=>setSelectedPlatform(platform)}/>
+        <PlatformSelector selectedPlatform={selectedPlatform} handleSelectedPlatform={(platform)=>setSelectedPlatform(platform)}/>
         <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>

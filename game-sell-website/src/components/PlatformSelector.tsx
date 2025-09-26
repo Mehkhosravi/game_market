@@ -3,19 +3,22 @@ import usePlatform from "../hooks/usePlatform";
 import type { Platform } from "../hooks/useGame";
 
 interface Props {
-  handleSelectedPlatform: (platform: Platform|null) => void;
+  handleSelectedPlatform: (platform: Platform | null) => void;
+  selectedPlatform: Platform | null;
 }
 
-export const PlatformSelector = ({ handleSelectedPlatform }: Props) => {
+export const PlatformSelector = ({
+  handleSelectedPlatform,
+  selectedPlatform,
+}: Props) => {
   const { data: platforms, error } = usePlatform();
-
-  console.log(platforms);
-  if (error) return null; 
+  if (error) return null;
+  
   return (
     <Menu.Root>
       <Menu.Trigger asChild>
         <Button variant="outline" size="sm">
-          platform selector
+          {selectedPlatform?.name || 'Select Platform'}
         </Button>
       </Menu.Trigger>
       <Portal>
@@ -25,7 +28,9 @@ export const PlatformSelector = ({ handleSelectedPlatform }: Props) => {
               <Menu.Item
                 value={platform.name}
                 key={platform.id}
-                onClick={() => handleSelectedPlatform(platform)}
+                onClick={() => {
+                  handleSelectedPlatform(platform);
+                }}
               >
                 {platform.name}
               </Menu.Item>
