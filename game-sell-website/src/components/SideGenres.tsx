@@ -3,12 +3,13 @@ import { useGenre, type Genre } from "../hooks/useGenre";
 import getImageCropped from "../services/crop-image";
 import { SideGenreSkeleton } from "./SideGenreSkeleton";
 
-interface Props{
-  onSelectedGenre: (genre:Genre)=>void;
+interface Props {
+  onSelectedGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
-export const SideGenres = ({ onSelectedGenre }:Props) => {
+export const SideGenres = ({ onSelectedGenre, selectedGenre }: Props) => {
   const { data: genres, isLoading, error } = useGenre();
-  if (isLoading)  return( <SideGenreSkeleton /> );
+  if (isLoading) return <SideGenreSkeleton />;
   if (error) return null;
 
   return (
@@ -16,8 +17,23 @@ export const SideGenres = ({ onSelectedGenre }:Props) => {
       {genres.map((genre) => (
         <ListItem key={genre.id} paddingY="5px">
           <HStack>
-            <Image boxSize="32px" borderRadius={8} key={genre.id} src={getImageCropped(genre.image_background)} />
-            <Button fontSize="sm" variant="ghost" onClick={()=>onSelectedGenre(genre)} >{genre.name}</Button>
+            <Image
+              boxSize="32px"
+              borderRadius={8}
+              key={genre.id}
+              src={getImageCropped(genre.image_background)}
+            />
+            <Button
+              fontWeight={
+                genre.id === selectedGenre?.id ? "extrabold" : "normal"
+              }
+              bg={genre.id === selectedGenre?.id  ? "gray.700" : ""}
+              fontSize="sm"
+              variant="ghost"
+              onClick={() => onSelectedGenre(genre)}
+            >
+              {genre.name}
+            </Button>
           </HStack>
         </ListItem>
       ))}
