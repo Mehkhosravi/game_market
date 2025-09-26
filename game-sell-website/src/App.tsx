@@ -4,11 +4,12 @@ import { GameGrid } from "./components/GameGrid";
 import { SideGenres } from "./components/SideGenres";
 import { useState } from "react";
 import type { Genre } from "./hooks/useGenre";
-import { PlatformSelector } from "./components/platformSelector";
+import { PlatformSelector } from "./components/PlatformSelector";
+import type { Platform } from "./hooks/usePlatform";
 
 function App() {
   const[ selectedGenre, setSelectedGenre]=useState<Genre | null>(null);
-
+  const [ selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
   return (
     <Grid gridTemplate={{
       base: `"nav" " main"`,
@@ -26,8 +27,8 @@ function App() {
         <SideGenres selectedGenre={selectedGenre} onSelectedGenre={(genre)=> setSelectedGenre(genre)}/>
       </GridItem>
       <GridItem area="main" >
-        <PlatformSelector />
-        <GameGrid selectedGenre={selectedGenre} />
+        <PlatformSelector handleSelectedPlatform={(platform)=>setSelectedPlatform(platform)}/>
+        <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>
   );
