@@ -12,7 +12,7 @@ import { Sortselector } from "./components/Sortselector";
 export interface GameQuery{
   genre: Genre|null;
   platform: Platform|null;
-  sortOrder: string|null
+  sortOrder: string;
 }
 function App() {
   const[ gameQuery, setGameQuery]=useState<GameQuery>({} as GameQuery);
