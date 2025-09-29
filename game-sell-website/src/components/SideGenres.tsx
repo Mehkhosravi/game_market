@@ -1,5 +1,5 @@
 import { Box, Button, Heading, HStack, Image, ListItem, ListRoot } from "@chakra-ui/react";
-import { useGenre, type Genre } from "../hooks/useGenre";
+import useGenre, { type Genre } from "../hooks/useGenre";
 import getImageCropped from "../services/crop-image";
 import { SideGenreSkeleton } from "./SideGenreSkeleton";
 
