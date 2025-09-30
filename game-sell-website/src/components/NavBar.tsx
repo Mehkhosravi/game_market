@@ -12,7 +12,7 @@ export const NavBar = ({ onSearch }: Props) => {
     <HStack justifyContent="space-between">
       <HStack padding='10px' justifyContent="left">
         <Image src={logo} boxSize='60px'/>
-        <SearchingInput onSearch={onSearch} />
+        <SearchingInput onSearch={onSearch}  />
       </HStack>
       <ColorModeSwitch />
     </HStack>

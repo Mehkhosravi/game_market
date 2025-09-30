@@ -8,6 +8,7 @@ interface Props{
 
 export const SearchingInput = ({ onSearch }: Props) => {
     const ref= useRef<HTMLInputElement>(null);
+
   return (
     <form onSubmit={(event:React.FormEvent)=>{
         event.preventDefault();
