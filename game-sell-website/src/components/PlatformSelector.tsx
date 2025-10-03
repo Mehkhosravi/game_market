@@ -1,5 +1,5 @@
 import { Button, Menu } from "@chakra-ui/react";
-import usePlatform from "../hooks/usePlatform";
+import {usePlatform} from "../hooks/usePlatform";
 import type { Platform } from "../hooks/useGame";
 import { LuChevronDown } from "react-icons/lu";
 
@@ -13,8 +13,12 @@ export const PlatformSelector = ({
   handleSelectedPlatform,
   selectedPlatform,
 }: Props) => {
-  const { data: platforms , error } = usePlatform();
+  const { data: platforms , error, isLoading } = usePlatform();
+
+  //as data shipped static 
+  if (isLoading)return null;
   if (error) return null;
+  
   return (
     <Menu.Root>
       <Menu.Trigger asChild>

@@ -4,5 +4,4 @@ export interface Platform{
     name:string;
     slug:string;
 }
-const usePlatform= ()=>({data: platforms, erorr: null, isLoading: false});
-export default usePlatform;
+export const usePlatform= ()=>({data: platforms, error: null, isLoading: false});

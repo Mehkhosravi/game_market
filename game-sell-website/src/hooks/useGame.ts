@@ -9,13 +9,15 @@ export interface Platform {
 export interface Game {
   id: number;
   name: string;
+  slug:string;
   background_image: string;
   platforms: { platform: Platform }[];
   metacritic: number;
   rating_top: number;
 }
-export const useGame = (gameQuery: GameQuery) =>
-  useData<Game>(
+export const useGame = (gameQuery: GameQuery) =>{
+  if (!gameQuery) return { data: [], error: null, isLoading: false };
+  return(useData<Game>(
     "/games",
     {
       params: {
@@ -26,4 +28,5 @@ export const useGame = (gameQuery: GameQuery) =>
       },
     },
     [gameQuery]
-  );
+  ))
+}
