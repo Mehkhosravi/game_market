@@ -37,50 +37,39 @@ export const InputBox = ({ handleSelectedGame }: Props) => {
   );
 
   //searching logic
+const q = textInput.trim().toLowerCase();
   const filteredGames =
-    textInput.length > 0
-      ? simplifiedGames.filter((game) => game.slug.startsWith(textInput)) || []
+    q.length > 0
+      ? simplifiedGames.filter((g) => g.slug.toLowerCase().startsWith(q))
       : [];
-  console.log(filteredGames);
 
-useEffect(() => {
-    if (filteredGames.length > 0 && textInput.trim() !== "") {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }, [filteredGames, textInput]);
-
-  // ✅ Clean "close dropdown" function
-  const closeDropdown = (event: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
-      setIsOpen(false);
-    }
-  };
-
-  // ✅ Attach / remove event listener for outside clicks
+  // close when clicking outside
   useEffect(() => {
-    document.addEventListener("mousedown", closeDropdown);
-    return () => {
-      document.removeEventListener("mousedown", closeDropdown);
+    const onDocDown = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
     };
+    document.addEventListener("mousedown", onDocDown);
+    return () => document.removeEventListener("mousedown", onDocDown);
   }, []);
 
   return (
-    <Box ref={dropdownRef} width="-moz-fit-content" position="relative">
+    <Box ref={dropdownRef} width="fit-content" position="relative">
       <Input
         value={textInput}
         placeholder={isLoading ? "Loading..." : "Search..."}
-        onChange={(e) => {
-          setTextInput(e.target.value);
-          console.log("Input:", e.target.value);
+        onFocus={() => {
+          if (q && filteredGames.length > 0) setIsOpen(true);
         }}
-        //onSubmit={()=> setTextInput(textInput)}
+        onChange={(e) => {
+          const v = e.target.value;
+          setTextInput(v);
+          // open while typing if there are matches, otherwise keep closed
+          setIsOpen(v.trim().length > 0);
+        }}
       />
-      {isOpen && (
+      {isOpen && filteredGames.length > 0 && (
         <Dropdown
           handleSelectedGame={(gameSlug: string) =>{handleSelectedGame(gameSlug);
             setIsOpen(false);
