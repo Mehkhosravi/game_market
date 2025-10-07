@@ -3,23 +3,27 @@ import { useState } from "react";
 import { useSearchInput } from "../hooks/useSearchInput";
 import { Dropdown } from "./Dropdown";
 
-interface SearchingOutput {
+export interface SearchingOutput {
   id: number;
   name: string;
   slug: string;
 }
 
+interface Props{
+  handleSelectedGame: (gameName:string)=> void;
+}
+
 //fetching data
-export const InputBox = () => {
+export const InputBox = ({handleSelectedGame}:Props) => {
   const [textInput, setTextInput] = useState("");
+  
   const {
     data: allGames,
     error,
     isLoading,
   } = useSearchInput(textInput);
 
-//handling isloading and error
-  if (isLoading) return null;
+//handling error
   if (error) {
     console.log(error);
     return null;
@@ -44,13 +48,14 @@ return (
       <Box width="100%" position="relative">
         <Input
           value={textInput}
-          placeholder="Search..."
+          placeholder={isLoading ? "Loading..." : "Search..."}
           onChange={(e) => {
             setTextInput(e.target.value);
             console.log("Input:", e.target.value);
           }}
+          onSubmit={()=> setTextInput(textInput)}
         />
-        <Dropdown filteredGames={filteredGames} />
+        <Dropdown handleSelectedGame={(gameSlug:string)=>handleSelectedGame(gameSlug)} filteredGames={filteredGames} />
       </Box>
   );
 };

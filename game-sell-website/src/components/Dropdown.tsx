@@ -9,9 +9,10 @@ interface SearchingOutput {
 
 interface DropdownProps {
   filteredGames: SearchingOutput[];
+  handleSelectedGame ?: (gameSlug: string)=> void
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({ filteredGames }) => {
+export const Dropdown: React.FC<DropdownProps> = ({ filteredGames,handleSelectedGame }) => {
   if (filteredGames.length === 0) return null;
 
   return (
@@ -33,6 +34,10 @@ export const Dropdown: React.FC<DropdownProps> = ({ filteredGames }) => {
           px={3}
           py={2}
           _hover={{ bg: "gray.100", cursor: "pointer" }}
+          fontSize="sm"
+          onClick={()=>{
+            handleSelectedGame?.(game.slug);
+            console.log(`Selected game name: ${game.slug}`)}}
         >
           {game.name}
         </Box>

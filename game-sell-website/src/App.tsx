@@ -32,7 +32,8 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar 
+        <NavBar handleSelectedGame={(gameSlug: string) =>
+         setGameQuery({ ...gameQuery, searchText: gameSlug })}
         />
       </GridItem>
       <GridItem area="aside" hideBelow="lg" paddingX="5px">
@@ -65,5 +66,6 @@ function App() {
     </Grid>
   );
 }
+
 
 export default App;
