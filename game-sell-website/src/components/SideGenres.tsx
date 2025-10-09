@@ -10,10 +10,7 @@ interface Props {
 }
 export const SideGenres = ({ onSelectedGenre, selectedGenre }: Props) => {
   const { data: genres, isLoading, error } = useGenre();
-  const allChecked = selectedGenre === null;
 
-  
-  
   if (isLoading) return <SideGenreSkeleton />;
   if (error) return null;
 
@@ -21,7 +18,7 @@ export const SideGenres = ({ onSelectedGenre, selectedGenre }: Props) => {
     <Box paddingLeft="5px">
       <Heading fontSize="xl" marginBottom={3}>Genres</Heading>
       <Checkbox.Root
-        checked={allChecked}
+        defaultChecked={true}               
         onCheckedChange={({ checked }) => {
           // checked can be true | false | "indeterminate"
           if (checked === true) {

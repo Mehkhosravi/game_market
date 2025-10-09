@@ -59,7 +59,7 @@ function App() {
             <PlatformSelector
               selectedPlatform={gameQuery.platform}
               handleSelectedPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
+                setGameQuery({ ...gameQuery, platform})
               }
             />
             <Sortselector
