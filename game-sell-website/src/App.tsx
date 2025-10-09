@@ -9,7 +9,6 @@ import type { Platform } from "./hooks/usePlatform";
 import { Sortselector } from "./components/Sortselector";
 import { HeadingTitle } from "./components/HeadingTitle";
 
-
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
@@ -19,21 +18,25 @@ export interface GameQuery {
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  
+
   return (
     <Grid
-      gridTemplate={{
+      templateAreas={{
         base: `"nav" " main"`,
         lg: `"nav nav" "aside main"`,
       }}
-      gridColumn={{
+      templateColumns={{
         base: "1fr",
         lg: "200px 1fr",
       }}
+      justifyItems="stretch"
+      alignItems="start"
     >
       <GridItem area="nav">
-        <NavBar handleSelectedGame={(gameSlug: string) =>
-         setGameQuery({ ...gameQuery, searchText: gameSlug })}
+        <NavBar
+          handleSelectedGame={(gameSlug: string) =>
+            setGameQuery({ ...gameQuery, searchText: gameSlug })
+          }
         />
       </GridItem>
       <GridItem area="aside" hideBelow="lg" paddingX="5px">
@@ -42,8 +45,15 @@ function App() {
           onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
         />
       </GridItem>
-      <GridItem area="main">
-        <Box paddingLeft={5} spaceY={5}>
+      <GridItem area="main" 
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Box
+          w="100%"
+          paddingLeft={5}
+          spaceY={5}
+        >
           <HeadingTitle gameQuery={gameQuery} />
           <HStack gap={2}>
             <PlatformSelector
@@ -59,13 +69,12 @@ function App() {
               }
             />
           </HStack>
-        
+
           <GameGrid gameQuery={gameQuery} />
         </Box>
       </GridItem>
     </Grid>
   );
 }
-
 
 export default App;
