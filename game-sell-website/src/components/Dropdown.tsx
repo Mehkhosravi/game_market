@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
+import { useColorModeValue } from "./ui/color-mode";
 
 interface SearchingOutput {
   id: number;
@@ -15,13 +16,20 @@ interface DropdownProps {
 export const Dropdown: React.FC<DropdownProps> = ({ filteredGames,handleSelectedGame }) => {
   if (filteredGames.length === 0) return null;
 
+
+   // Use Chakra’s hook to automatically pick light/dark colors
+  const bgColor = useColorModeValue("white", "gray.700");
+  const hoverColor = useColorModeValue("gray.100", "gray.600");
+  const textColor = useColorModeValue("black", "white");
+  
   return (
     <Box
       position="absolute"
       top="100%"    // right below the input
       left={0}
       right={0}
-      bg="white"
+      bg={bgColor}
+      color={textColor}
       shadow="md"
       borderRadius="md"
       zIndex={10}
@@ -33,7 +41,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ filteredGames,handleSelected
           key={game.id}
           px={3}
           py={2}
-          _hover={{ bg: "gray.100", cursor: "pointer" }}
+          _hover={{ bg: hoverColor, cursor: "pointer" }}
           fontSize="sm"
           onClick={()=>{
             handleSelectedGame?.(game.slug);

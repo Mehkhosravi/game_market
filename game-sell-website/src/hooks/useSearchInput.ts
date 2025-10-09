@@ -13,6 +13,8 @@ export const useSearchInput = (textInput:string) =>{
     params: {
       search: textInput,
       page_size: 15,
+      search_exact: true,
+      search_precise: true
     },
   },
   [textInput]
