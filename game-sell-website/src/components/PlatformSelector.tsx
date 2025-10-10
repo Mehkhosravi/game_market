@@ -28,6 +28,14 @@ export const PlatformSelector = ({
       </Menu.Trigger>
       <Menu.Positioner>
         <Menu.Content>
+          {selectedPlatform
+          ?<Menu.Item
+            key={platforms.length + 1}
+            value="all platfroms"
+            onClick={() => handleSelectedPlatform(null)}
+          >All Platfroms
+          </Menu.Item>
+          : null}
           {platforms.map((platform) => (
             <Menu.Item
               key={platform.id}
