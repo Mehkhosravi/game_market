@@ -9,11 +9,13 @@ import type { Platform } from "./hooks/usePlatform";
 import { Sortselector } from "./components/Sortselector";
 import { HeadingTitle } from "./components/HeadingTitle";
 
+
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
   searchText: string;
+  parentPlatform: Platform | null
 }
 
 function App() {
@@ -57,10 +59,11 @@ function App() {
           <HeadingTitle gameQuery={gameQuery} />
           <HStack gap={2}>
             <PlatformSelector
-              selectedPlatform={gameQuery.platform}
-              handleSelectedPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform})
-              }
+              selectedPlatform={gameQuery.parentPlatform}
+              handleSelectedPlatform={(parentPlatform) =>{
+                setGameQuery({ ...gameQuery, parentPlatform});
+                console.log("selected Platform:", parentPlatform)
+              }}
             />
             <Sortselector
               selectedOrder={gameQuery.sortOrder}
