@@ -1,30 +1,42 @@
-import { Box, Button, Checkbox, Heading, HStack, Image, ListItem, ListRoot } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Heading,
+  HStack,
+  Image,
+  ListItem,
+  ListRoot,
+} from "@chakra-ui/react";
 import useGenre, { type Genre } from "../hooks/useGenre";
 import getImageCropped from "../services/crop-image";
 import { SideGenreSkeleton } from "./SideGenreSkeleton";
-
+import { useState } from "react";
 
 interface Props {
-  onSelectedGenre: (genre: Genre|null) => void;
+  onSelectedGenre: (genre: Genre | null) => void;
   selectedGenre: Genre | null;
 }
 export const SideGenres = ({ onSelectedGenre, selectedGenre }: Props) => {
   const { data: genres, isLoading, error } = useGenre();
+  const [isChechked, setIsChecked] = useState(true);
 
   if (isLoading) return <SideGenreSkeleton />;
   if (error) return null;
 
   return (
     <Box paddingLeft="5px">
-      <Heading fontSize="xl" marginBottom={3}>Genres</Heading>
+      <Heading fontSize="xl" marginBottom={3}>
+        Genres
+      </Heading>
       <Checkbox.Root
-        defaultChecked={true}               
+        defaultChecked={isChechked}
+        checked={isChechked}
         onCheckedChange={({ checked }) => {
-          // checked can be true | false | "indeterminate"
           if (checked === true) {
             onSelectedGenre(null); // show all
+            setIsChecked(true)
           }
-          // If user unchecks -> do nothing; wait for a genre click
         }}
         variant="outline"
         colorPalette="blue"
@@ -50,10 +62,13 @@ export const SideGenres = ({ onSelectedGenre, selectedGenre }: Props) => {
                 fontWeight={
                   genre.id === selectedGenre?.id ? "extrabold" : "normal"
                 }
-                bg={genre.id === selectedGenre?.id  ? "gray.700" : ""}
+                bg={genre.id === selectedGenre?.id ? "gray.700" : ""}
                 fontSize="sm"
                 variant="ghost"
-                onClick={() => onSelectedGenre(genre)}
+                onClick={() => {
+                  onSelectedGenre(genre);
+                  setIsChecked(false);
+                }}
               >
                 {genre.name}
               </Button>
