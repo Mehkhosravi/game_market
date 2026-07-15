@@ -72,7 +72,7 @@ game-sell-website/
     ├── App.tsx                 # Core application controller
     ├── index.css               # Base Tailwind CSS / Global styling overrides
     └── main.tsx                # Client entry-point rendering root React tree
-
+```
 
 ## ⚙️ Installation & Setup
 
