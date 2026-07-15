@@ -1,8 +1,12 @@
 
 # 🎮 GameMarket
- I did the project as part of the ReactJS, TypeScript learning at https://codewithmosh.com/ (I suggest him for all trying to learn React)
- I used the public APIs of RAWG.io (providing information about games)
-An interactive, responsive, and modern React-based Web Application designed for browsing, searching, and purchasing digital video games. Built with a component-driven architecture, this application delivers a seamless shopping experience with smooth UI transitions and real-time interactive features.
+ I did the project as part of the ReactJS, TypeScript learning at https://codewithmosh.com/ (I suggest him for all trying to learn React!)
+ I used the public APIs of RAWG.io (providing information about games!), and the design is also similar to rawg.io.
+ 
+This is an interactive, responsive, and modern React-based Web Application designed for browsing, searching, and purchasing digital video games. Built with a component-driven architecture, this application delivers a seamless shopping experience with smooth UI transitions and real-time interactive features.
+
+<img width="1366" height="638" alt="image" src="https://github.com/user-attachments/assets/9ffe01c6-fa5d-4c0c-aa7f-27ea17478ed8" />
+
 
 ---
 
