@@ -138,5 +138,3 @@ Images are optimized for performance, and lazy loading is incorporated where app
 
 This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
 
-```
-
