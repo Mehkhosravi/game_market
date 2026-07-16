@@ -6,11 +6,17 @@ export interface Platform {
   slug: string;
   name: string;
 }
+
+interface GamePlatform {
+  platform: Platform;
+}
+
 export interface Game {
   id: number;
   name: string;
   slug:string;
   background_image: string;
+  platforms: GamePlatform[];
   parent_platform: Platform;
   metacritic: number;
   rating_top: number;

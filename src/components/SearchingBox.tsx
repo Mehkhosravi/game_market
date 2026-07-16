@@ -6,7 +6,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useSearchInput } from "../hooks/useSearchInput";
-import { InputBox } from "./InputBox";
+
 
 interface SearchingOutput {
   id: number;
